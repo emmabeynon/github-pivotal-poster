@@ -20,10 +20,10 @@ This app is built using Ruby and Sinatra.  It makes use of GitHub webhooks to re
 2. Run `bundle install`.
 3. Get your [GitHub access token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) and assign to the `GITHUB_ACCESS_TOKEN` environment variable.
 4. Assign your Pivotal Tracker Username to the `PIVOTAL_USERNAME` environment variable.
-5. Assign your Pivotal Tracker password to the `PIVOTAL_PASSWORD` environment variable.
-6. To set up a Webook:
+5. Retrieve your API token from your Pivotal Tracker account settings and assign it to the `PIVOTAL_API_TOKEN` environment variable.
+6. To set up a Webhook:
   -  Navigate to your chosen organisation or repository's settings on GitHub. Select 'Webhooks' and click 'Add webhook'  
-  - Paste your payload URL (i.e. 'https://[inster-your-site-here]/payload') in the Payload URL box.
+  - Paste your payload URL (i.e. 'https://[insert-your-site-here]/payload') in the Payload URL box.
   - Select content type as application/json.
   - Select 'Let me select individual events' and check the 'Pull requests' box.
   - Leave the Active checkbox checked, and save.
