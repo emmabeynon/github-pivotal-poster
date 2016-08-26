@@ -1,15 +1,20 @@
 require 'pivotal-tracker'
 
 class PivotalPoster
-  attr_reader :client, :project
+  attr_reader :project, :story
 
-  def initialize(project_id)
-    @client = authenticate
+  def initialize(project_id, story_id)
+    authenticate
     @project = retrieve_project(project_id)
+    @story = retrieve_story(story_id)
   end
 
   def retrieve_project(project_id)
     PivotalTracker::Project.find(project_id)
+  end
+
+  def retrieve_story(story_id)
+    project.stories.find(story_id)
   end
 
 private
