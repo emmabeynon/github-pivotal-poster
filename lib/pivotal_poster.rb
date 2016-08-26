@@ -1,12 +1,13 @@
 require 'pivotal-tracker'
 
 class PivotalPoster
-  attr_reader :project, :story
+  attr_reader :project, :story, :pr_url
 
-  def initialize(project_id, story_id)
+  def initialize(project_id, story_id, pr_url)
     authenticate
-    @project = retrieve_project(project_id)
-    @story = retrieve_story(story_id)
+    @project ||= retrieve_project(project_id)
+    @story ||= retrieve_story(story_id)
+    @pr_url = pr_url
   end
 
   def retrieve_project(project_id)
@@ -15,6 +16,10 @@ class PivotalPoster
 
   def retrieve_story(story_id)
     project.stories.find(story_id)
+  end
+
+  def post_github_pr_url
+    story.notes.create(text: "#{pr_url}")
   end
 
 private
