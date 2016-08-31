@@ -20,6 +20,8 @@ describe PivotalPoster do
   before(:each) do
     allow(PivotalTracker::Project).to receive(:find).with(1788875).and_return(pivotal_project)
     allow(pivotal_project.stories).to receive(:find).with(128659665).and_return(pivotal_story)
+    allow(pivotal_story.notes).to receive(:all)
+    allow(pivotal_story.notes.all).to receive(:detect).and_return(false)
     pivotal_poster.post(1788875, 128659665, 'https://github.com/gov-test-org/project-b/pull/1')
   end
 
@@ -34,4 +36,5 @@ describe PivotalPoster do
       expect(pivotal_poster.story).to eq(pivotal_story)
     end
   end
+
 end
