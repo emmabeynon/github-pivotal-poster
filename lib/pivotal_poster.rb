@@ -21,10 +21,17 @@ class PivotalPoster
     project.stories.find(story_id)
   end
 
-
 private
 
   def post_github_pr_url(pr_url)
-    story.notes.create(text: "#{pr_url}")
+    unless pr_url_is_present?(pr_url)
+      story.notes.create(text: "#{pr_url}")
+    end
+  end
+
+  def pr_url_is_present?(pr_url)
+    story.notes.all.detect do |note|
+      note.text == pr_url
+    end
   end
 end
